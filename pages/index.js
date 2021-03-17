@@ -12,7 +12,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a href="https://daily-react-ui-challenge.vercel.app/">Daily React UI challenge</a>
         </h1>
 
         <p className={styles.description}>
