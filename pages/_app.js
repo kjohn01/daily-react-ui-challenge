@@ -1,4 +1,4 @@
-import '../assets/styles/globals.scss'
+import '../styles/globals.scss'
 import 'bootstrap/dist/css/bootstrap.css'
 
 function MyApp({ Component, pageProps }) {
