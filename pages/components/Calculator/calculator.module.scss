@@ -1,0 +1,22 @@
+@import "../../../styles/globals.scss";
+
+.main{
+    width: 25rem;
+    height: 35rem;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.display {
+    padding: 1rem;
+    text-align: right;
+    border-bottom: 1px solid grey;
+}
+
+.digits {
+    display: grid;
+    button {
+        display: inline-grid;
+    }
+}
+

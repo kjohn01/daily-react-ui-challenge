@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Navbar>
+        <Navbar className="w-100">
           <Container>
             <Navbar.Brand className={styles.title} href="https://daily-react-ui-challenge.vercel.app/">
               <img
@@ -36,6 +36,16 @@ export default function Home() {
                 description="Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
               across all continents except Antarctica" 
                 img="https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+              />
+            </a>
+          </Link>
+          <Link href="/CalculatorPage">
+            <a className={styles.card}>
+              <MediaCard 
+                title="CalculatorPage" 
+                description="Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+              across all continents except Antarctica" 
+                img="https://cdn.dribbble.com/users/85529/screenshots/2377589/calculator.png"
               />
             </a>
           </Link>

@@ -1,0 +1,6 @@
+@import '../styles/globals.scss';
+
+.root {
+    @include page;
+    background-color: gray;
+}

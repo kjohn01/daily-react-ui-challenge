@@ -6,7 +6,7 @@ export default function MediaCard({ title, description, img }) {
   return (
     <Card className={styles.card}>
       <Card.Img variant="top" src={img} />
-      <Card.Body>
+      <Card.Body className={styles.text}>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>
       </Card.Body>

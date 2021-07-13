@@ -1,8 +1,7 @@
 @import "../../../styles/globals.scss";
 
 .main {
-  min-height: 100vh;
-  display: flex;
+  @include page;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -36,6 +35,7 @@
 }
 
 .footer {
+  width: 100%;
   display: flex;
   justify-content: center;
   padding: 0.5rem;

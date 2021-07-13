@@ -16,11 +16,17 @@
       margin: 0;
       line-height: 1.5;
     }
+    img {
+      height: 15rem;
+    }
+    .text {
+      height: 11rem;
+    }
   }
   
   .card:hover,
   .card:focus,
   .card:active {
-    color: #0070f3;
-    border-color: #0070f3;
+    color: $color-primary;
+    border-color: $color-primary;
   }
