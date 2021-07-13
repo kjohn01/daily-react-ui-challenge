@@ -1,12 +1,39 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import _ from 'lodash';
 import styles from './calculator.module.scss';
 
 export default function Calculator() {
-  const createDigits = () => _.range(1,10).map((num, i) => (
-      <button key={`D-${num}`} value={num} onClick={() => console.log(num)}>{num}</button>
-    ));
-  const Digits = useMemo(() => createDigits(), []);
+  const handleNumber = (num) => {
+    console.log("number", num);
+  };
+
+  const handleOperands = (ops) => {
+    console.log("operands", ops);
+  };
+
+  const handleClick = useCallback(
+    (e) => {
+      console.log(e.target.tagName);
+      const val = e.target.value;
+      if (e.target.tagName !== 'BUTTON' || typeof val !== "string") return;
+      if (_.range(1,10).indexOf(parseInt(val)) >= 0) handleNumber(val);
+      else handleOperands(val);
+    }, []
+  );
+
+  const createDigits = () => _.range(1,10).map((num) => (
+      <button key={`D-${num}`} value={num}>{num}</button>
+  ));
+  const createOperands = () => ['/', 'x', '-', '+', '='].map((ops) => (
+    <button key={`OPS-${ops}`} value={ops}>{ops}</button>
+  ));
+  const createSecondaryOperands = () => ['C', '±', '%'].map((ops) => (
+    <button key={`OPS-${ops}`} value={ops}>{ops}</button>
+  ));
+  
+  const digits = useMemo(() => createDigits(), []);
+  const operands = useMemo(() => createOperands(), []);
+  const secondaryOperands = useMemo(() => createSecondaryOperands(), []);
 
   return (
     <main className={styles.main}>
@@ -15,20 +42,14 @@ export default function Calculator() {
             <h1>Result</h1>
         </div>
         <div className={styles.buttons}>
-            <div className={styles.digits}>
-              <button value="C" className={styles.secondaryOperands} onClick={() => console.log("C")}>C</button>
-              <button value="±" className={styles.secondaryOperands} onClick={() => console.log("±")}>±</button>
-              <button value="%" className={styles.secondaryOperands} onClick={() => console.log("%")}>%</button>
-              {Digits}
-              <button value={0} onClick={() => console.log(0)} className={styles.zero}>0</button>
-              <button value="." onClick={() => console.log(".")}>.</button>
+            <div className={styles.digits} onClick={handleClick}>
+              {secondaryOperands}
+              {digits}
+              <button value={0} className={styles.zero}>0</button>
+              <button value=".">.</button>
             </div>
             <div className={styles.operands}>
-              <button value="/" onClick={() => console.log("/")}>/</button>
-              <button value="x" onClick={() => console.log("x")}>x</button>
-              <button value="-" onClick={() => console.log("-")}>-</button>
-              <button value="+" onClick={() => console.log("+")}>+</button>
-              <button value="=" onClick={() => console.log("=")}>=</button>
+              {operands}
             </div>
         </div>
     </main>
