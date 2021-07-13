@@ -1,0 +1,57 @@
+@import "../../../styles/globals.scss";
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  @include desktop() {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.card {
+  color: inherit;
+  width: 20rem;
+  margin: 1rem;
+}
+
+.logo {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: black;
+  color: white;
+  a {
+    color: inherit;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
