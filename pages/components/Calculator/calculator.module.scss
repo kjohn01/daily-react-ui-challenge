@@ -1,22 +1,69 @@
 @import "../../../styles/globals.scss";
 
 .main{
-    width: 25rem;
-    height: 35rem;
+    width: 30rem;
     background-color: white;
     border-radius: 5px;
+    overflow: hidden;
 }
 
 .display {
+    margin-top: 0.5rem;
     padding: 1rem;
     text-align: right;
     border-bottom: 1px solid grey;
 }
 
-.digits {
+.buttons {
     display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+@mixin grid {
+    display: grid;
+    grid-gap: 1px;
+    background-color: grey;
     button {
-        display: inline-grid;
+        background-color: lavenderblush;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 30px;
+        border: 0;
     }
 }
 
+.operands {
+    @include grid;
+    grid-template-columns: auto;
+    background-color: orange;
+    padding-top: 1px;
+    button {
+        background-color: transparent;
+        border-left: 1px solid grey;
+        border-bottom: 1px solid grey;
+        color: white;
+    }
+}
+
+.digits {
+    grid-column: 1 / span 3;
+    @include grid;
+    grid-template-columns: auto auto auto;
+    .secondaryOperands {
+        background-color: lavender;
+    }
+    .zero {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        text-align: left;
+        padding-left: 3.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .digits {
+        .zero {
+            padding-left: 3rem;
+        }
+    }
+}

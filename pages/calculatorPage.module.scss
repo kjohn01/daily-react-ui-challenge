@@ -4,3 +4,10 @@
     @include page;
     background-color: gray;
 }
+
+@media (max-width: 576px) {
+    .root {
+        background-color: inherit;
+        align-items: flex-end;
+    }
+}
