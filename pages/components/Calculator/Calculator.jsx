@@ -6,7 +6,6 @@ import { calculate, findIndexOfLastOperand, trimLastOperand, findLastCalculation
 export default function Calculator() {
   const [display, setDisplay] = useState("0");
   const [equation, setEquation] = useState("0");
-  const [isNewNumber, setIsNewNumber] = useState(true);
 
   const toggleNegativity = useCallback((eq) => {
     // Analyse the equation and add the "-" sign to the appropriate place
@@ -39,30 +38,32 @@ export default function Calculator() {
   }, [display, equation]);
 
   const handleNumber = useCallback((num) => {
-    if (isNewNumber || equation[equation.length-2] === "=") {
+    if (equation === "0" || equation[equation.length-2] === "=") {
       setDisplay(num);
       setEquation(num);
+    }
+    else if (equation != trimLastOperand(equation)) {
+      setDisplay(num);
+      setEquation(equation + num);
     }
     else if (display === "0") {
       setDisplay(num);
       // user tapped 0
-      if (equation[equation.length-1] === "0") setEquation(equation.slice(0, equation.length-1)+num);
+      if (equation[equation.length-1] === "0") setEquation(equation.slice(0, equation.length-1) + num);
       // current result is 0
-      else setEquation(equation+num);
+      else setEquation(equation + num);
     }
     else {
-      setDisplay(display+num);
-      setEquation(equation+num);
+      setDisplay(display + num);
+      setEquation(equation + num);
     }
-    setIsNewNumber(false);
-  }, [display, equation, isNewNumber])
+  }, [display, equation])
 
   const handleOperands = useCallback((ops) => {
     // Consecutive operands = overwriting
     // Divided by 0 = 0
     const eq = trimLastOperand(equation);
     const lastOpsIndex = findIndexOfLastOperand(eq);
-    setIsNewNumber(false);
     switch (ops) {
       case "/":
       case "x":
@@ -81,7 +82,6 @@ export default function Calculator() {
         // Reset states
         setDisplay("0");
         setEquation("0");
-        setIsNewNumber(true);
         break;
         
       case "±":

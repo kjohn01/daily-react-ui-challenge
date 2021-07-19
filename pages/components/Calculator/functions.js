@@ -1,9 +1,12 @@
-import math from 'mathjs';
+import { evaluate } from 'mathjs';
 import _ from 'lodash';
 
 export const isDigit = (num) => _.range(10).indexOf(num) >= 0 
 
-export const calculate = (eq) => math.evaluate(trimLastOperand(eq).replace(" ", "").replace("x", "*")).toString();
+export const calculate = (eq) => {
+  // console.log(eq);
+  return evaluate(trimLastOperand(eq).replace(/ /, "").replace(/x/g, "*")).toString();
+}
 
 export const findIndexOfLastOperand = (eq) => {
     // Return the index of the last ops in the input equation
@@ -40,5 +43,5 @@ export const findIndexOfLastOperand = (eq) => {
     for (i = eq.length-1; i >= 0; i--) {
       if (['-', '+'].indexOf(eq[i]) >= 0 && eq[i+1] === " ") break;
     }
-    return eq.substring(i+2);
+    return i === -1 ? eq : eq.substring(i+2);
   }
