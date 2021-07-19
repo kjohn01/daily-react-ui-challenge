@@ -7,6 +7,45 @@ export default function Calculator() {
   const [equation, setEquation] = useState("0");
   const [isNewNumber, setIsNewNumber] = useState(true);
 
+  const findIndexOfLastOps = (eq) => {
+    // return the index of the last ops in the input equation
+    // -1 is returned if there's no ops
+    let i;
+    for (i = eq.length-1; i <= 0; i--) {
+      if (['/', 'x', '-', '+'].indexOf(eq[i]) >= 0 && eq[i+1] === " ") break;
+    }
+    return i;
+  }
+
+  const findIndexOfLastNumber = (eq) => {
+    // return the starting index of the last number in the input equation
+    const lastOpsIndex = findIndexOfLastOps(eq);
+    if (lastOpsIndex < 0) return 0;
+    if (lastOpsIndex === eq.length-2) return findIndexOfLastNumber(eq.substring(0, eq.length-3));
+    return lastOpsIndex + 2;
+  }
+
+  const toggleNegativity = () => {
+    // Analyse the equation and add the "-" sign to the appropriate place
+    // Adjust the display
+  }
+
+  const percentage = () => {
+    // turn the current display value into %
+    // find the last number in the equation and replace it with the current display
+    const result = (Number(display) / 100).toString();
+    const lastOpsIndex = findIndexOfLastOps();
+    if (lastOpsIndex > 0) setEquation(equation.substring(0, lastOpsIndex+2) + result);
+    else setEquation(result);
+    setDisplay(result);
+  }
+
+  const calculate = (eq) => {
+    // return the calculated value;
+    // Note that eq may not be the complete equation
+    eq = eq.replace(" ", "");
+  }
+
   const handleNumber = (num) => {
     if (isNewNumber || equation[equation.length-1] === "=") {
       setDisplay(num);
@@ -77,37 +116,6 @@ export default function Calculator() {
     }
     setIsNewNumber(false);
   };
-
-  const calculate = (eq) => {
-    // return the calculated value;
-    // Note that eq may not be the complete equation
-    eq = eq.replace(" ", "");
-  }
-
-  const toggleNegativity = () => {
-    // Analyse the equation and add the "-" sign to the appropriate place
-    // Adjust the display
-  }
-
-  const percentage = () => {
-    // turn the current display value into %
-    // find the last number in the equation and replace it with the current display
-    const result = (Number(display) / 100).toString();
-    const lastOpsIndex = findIndexOfLastOps();
-    if (lastOpsIndex > 0) setEquation(equation.substring(0, lastOpsIndex+2) + result);
-    else setEquation(result);
-    setDisplay(result);
-  }
-
-  const findIndexOfLastOps = () => {
-    // return the index of the last ops in the equation
-    // -1 is returned if there's no ops
-    let i;
-    for (i = equation.length-1; i <= 0; i--) {
-      if (['/', 'x', '-', '+'].indexOf(equation[i]) >= 0 && equation[i+1] === " ") break;
-    }
-    return i;
-  }
 
   const handleClick = useCallback(
     (e) => {
