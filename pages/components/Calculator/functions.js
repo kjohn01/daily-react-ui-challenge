@@ -10,7 +10,7 @@ export const findIndexOfLastOperand = (eq) => {
     // -1 is returned if there's no ops
     let i;
     for (i = eq.length-1; i >= 0; i--) {
-      if (['/', 'x', '-', '+'].indexOf(eq[i]) >= 0 && eq[i+1] === " ") break;
+      if (['/', 'x', '-', '+', '='].indexOf(eq[i]) >= 0 && eq[i+1] === " ") break;
     }
     return i;
   }
@@ -23,10 +23,15 @@ export const findIndexOfLastOperand = (eq) => {
 
   export const findLastNumber = (eq) => {
     // Return the starting index and value of the last number in the input equation
+    // [index, value, negativity]
+    // Negativity will be true when the last number is negative, including -0
     eq = trimLastOperand(eq);
     const lastOpsIndex = findIndexOfLastOperand(eq);
-    if (lastOpsIndex < 0) return [0, Number(eq)];
-    return [lastOpsIndex + 2, Number(eq.substring(lastOpsIndex + 2))];
+    let i;
+    if (lastOpsIndex < 0) i = 0;
+    else i = lastOpsIndex + 2;
+    const s = eq.substring(i);
+    return [i, Number(s), s[0] === "-"];
   }
 
   export const findLastCalculation = (eq) => {

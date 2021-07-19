@@ -8,10 +8,27 @@ export default function Calculator() {
   const [equation, setEquation] = useState("0");
   const [isNewNumber, setIsNewNumber] = useState(true);
 
-  const toggleNegativity = () => {
+  const toggleNegativity = useCallback((eq) => {
     // Analyse the equation and add the "-" sign to the appropriate place
-    // Adjust the display
-  }
+    if (eq != equation) {
+      // if followed by an operand, add "-0"
+      setDisplay("-0");
+      if (equation[equation.length-2] === "=") setEquation("-0");
+      else setEquation(equation + "-0");
+      return;
+    }
+    // Handle display & equation
+    let absStr = Math.abs(Number(display)).toString();
+    let base = eq.substring(0, findLastNumber(eq)[0]);
+    if (display.startsWith("-")) {
+      setDisplay(absStr);
+      setEquation(base + absStr);
+    }
+    else {
+      setDisplay(`-${absStr}`);
+      setEquation(`${base}-${absStr}`);
+    }
+  }, [display, equation]);
 
   const percentage = useCallback(() => {
     // turn the current display value into %
@@ -41,28 +58,23 @@ export default function Calculator() {
   }, [display, equation, isNewNumber])
 
   const handleOperands = useCallback((ops) => {
-    // console.log("operands", ops);
     // Consecutive operands = overwriting
     // Divided by 0 = 0
-    let eq = equation;
-    let lastOpsIndex;
+    const eq = trimLastOperand(equation);
+    const lastOpsIndex = findIndexOfLastOperand(eq);
+    setIsNewNumber(false);
     switch (ops) {
       case "/":
       case "x":
-        eq = trimLastOperand(eq);
-        lastOpsIndex = findIndexOfLastOperand(eq);
         // partial calculate
         if (lastOpsIndex !== -1 && ["x", "/"].indexOf(eq[lastOpsIndex]) >= 0) setDisplay(calculate(findLastCalculation(eq)));
         setEquation(`${eq} ${ops} `);
-        setIsNewNumber(false);
         break;
       
       case "-":
       case "+":
-        eq = trimLastOperand(eq);
-        if (findIndexOfLastOperand(eq) !== -1) setDisplay(calculate(eq));
+        if (lastOpsIndex !== -1) setDisplay(calculate(eq));
         setEquation(`${eq} ${ops} `);
-        setIsNewNumber(false);
         break;
   
       case "C":
@@ -73,41 +85,37 @@ export default function Calculator() {
         break;
         
       case "±":
-        toggleNegativity();
+        toggleNegativity(eq);
         break;
 
       case "%":
         if (!isDigit(parseInt(equation[equation.length-1]))) break;
         percentage();
-        setIsNewNumber(false);
         break;
       
       case ".":
-        eq = trimLastOperand(eq);
-        // if followed by an operand, add "0."
         if (eq != equation) {
+          // if followed by an operand, add "0."
           setDisplay("0.");
-          setEquation(equation + "0.");
+          if (equation[equation.length-2] === "=") setEquation("0.");
+          else setEquation(equation + "0.");
         }
-        else if (Number.isInteger(findLastNumber(eq)[1])) {
+        else if (isDigit(parseInt(equation[equation.length-1])) && Number.isInteger(findLastNumber(eq)[1])) {
           setDisplay(display + ".");
           setEquation(equation + ".");
         }
         // if the current number is already a float, does nothing
-        setIsNewNumber(false);
         break;
 
       case "=":
-        eq = trimLastOperand(eq);
         setEquation(eq + " = ");
         setDisplay(calculate(eq));
-        setIsNewNumber(false);
         break;
     
       default:
         break;
     }
-  }, [display, equation, percentage]);
+  }, [display, equation, percentage, toggleNegativity]);
 
   const handleClick = useCallback(
     (e) => {
