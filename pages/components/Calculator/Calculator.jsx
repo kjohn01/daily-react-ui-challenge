@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useState } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 import _ from 'lodash';
 import styles from './calculator.module.scss';
 import { calculate, findIndexOfLastOperand, findIndexOfLastNumber, trimLastOperand } from './functions';
