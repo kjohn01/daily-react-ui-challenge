@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useState } from 'react';
 import _ from 'lodash';
 import styles from './calculator.module.scss';
-import { calculate, findIndexOfLastOperand, trimLastOperand, findLastCalculation } from './functions';
+import { calculate, findIndexOfLastOperand, trimLastOperand, findLastCalculation, findLastNumber } from './functions';
 
 export default function Calculator() {
   const [display, setDisplay] = useState("0");
@@ -83,8 +83,18 @@ export default function Calculator() {
         break;
       
       case ".":
+        eq = trimLastOperand(eq);
         // if followed by an operand, add "0."
+        if (eq != equation) {
+          setDisplay("0.");
+          setEquation(equation + "0.");
+        }
+        else if (Number.isInteger(findLastNumber(eq)[1])) {
+          setDisplay(display + ".");
+          setEquation(equation + ".");
+        }
         // if the current number is already a float, does nothing
+        setIsNewNumber(false);
         break;
 
       case "=":

@@ -13,15 +13,17 @@ export const findIndexOfLastOperand = (eq) => {
   }
 
   export const trimLastOperand = (eq) => {
-    if (findIndexOfLastOperand === eq.length-2) eq = eq.substring(0, eq.length-3);
+    const lastOpsIndex = findIndexOfLastOperand(eq);
+    if (lastOpsIndex !== -1 && lastOpsIndex === eq.length-2) eq = eq.substring(0, eq.length-3);
     return eq;
   }
 
-  export const findIndexOfLastNumber = (eq) => {
-    // Return the starting index of the last number in the input equation
-    const lastOpsIndex = findIndexOfLastOperand(trimLastOperand(eq));
-    if (lastOpsIndex < 0) return 0;
-    return lastOpsIndex + 2;
+  export const findLastNumber = (eq) => {
+    // Return the starting index and value of the last number in the input equation
+    eq = trimLastOperand(eq);
+    const lastOpsIndex = findIndexOfLastOperand(eq);
+    if (lastOpsIndex < 0) return [0, Number(eq)];
+    return [lastOpsIndex + 2, Number(eq.substring(lastOpsIndex + 2))];
   }
 
   export const findLastCalculation = (eq) => {
