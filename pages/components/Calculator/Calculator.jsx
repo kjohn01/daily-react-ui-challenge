@@ -8,7 +8,7 @@ export default function Calculator() {
   const [equation, setEquation] = useState("0");
   const [isNewNumber, setIsNewNumber] = useState(true);
 
-  const findIndexOfLastOps = (eq) => {
+  const findIndexOfLastOperand = (eq) => {
     // return the index of the last ops in the input equation
     // -1 is returned if there's no ops
     let i;
@@ -18,11 +18,16 @@ export default function Calculator() {
     return i;
   }
 
+  const trimLastOperand = (eq) => {
+    if (findIndexOfLastOperand === eq.length-2) eq = eq.substring(0, eq.length-3);
+    return eq;
+  }
+
   const findIndexOfLastNumber = (eq) => {
     // return the starting index of the last number in the input equation
-    const lastOpsIndex = findIndexOfLastOps(eq);
+    const lastOpsIndex = findIndexOfLastOperand(trimLastOperand(eq));
     if (lastOpsIndex < 0) return 0;
-    if (lastOpsIndex === eq.length-2) return findIndexOfLastNumber(eq.substring(0, eq.length-3));
+    // if (lastOpsIndex === eq.length-2) return findIndexOfLastNumber(eq.substring(0, eq.length-3));
     return lastOpsIndex + 2;
   }
 
@@ -34,24 +39,17 @@ export default function Calculator() {
   const percentage = () => {
     // turn the current display value into %
     // find the last number in the equation and replace it with the current display
-    const result = (Number(display) / 100).toString();
-    const lastOpsIndex = findIndexOfLastOps();
-    if (lastOpsIndex > 0) setEquation(equation.substring(0, lastOpsIndex+2) + result);
-    else setEquation(result);
-    setDisplay(result);
+    // const result = (Number(display) / 100).toString();
+    // const lastOpsIndex = findIndexOfLastOperand();
+    // if (lastOpsIndex > 0) setEquation(equation.substring(0, lastOpsIndex+2) + result);
+    // else setEquation(result);
+    // setDisplay(result);
   }
 
-  const calculate = (eq) => {
-    // return the calculated value of the input equation;
-    // Note that eq may not be the complete equation
-    eq = eq.replace(" ", "");
-    // Get rid of the last letter if it's an ops
-    if (['/', 'x', '-', '+'].indexOf(eq[eq.length-1]) >= 0) eq = eq.substring(0, eq.length-1);
-    return math.evaluate(eq.replace("x", "*"));
-  }
+  const calculate = (eq) => math.evaluate(trimLastOperand(eq).replace(" ", "").replace("x", "*"));
 
   const handleNumber = (num) => {
-    if (isNewNumber || equation[equation.length-1] === "=") {
+    if (isNewNumber || equation[equation.length-2] === "=") {
       setDisplay(num);
       setEquation(num);
     }
@@ -73,11 +71,11 @@ export default function Calculator() {
     // console.log("operands", ops);
     // Consective operands = overwriting
     // Divided by 0 = 0
-
+    let eq = equation;
     switch (ops) {
       case "/":
         // partial calculate
-        setDisplay(calculate(equation))
+        
         break;
 
       case "x":
@@ -112,13 +110,15 @@ export default function Calculator() {
         break;
 
       case "=":
-        setDisplay(calculate(equation));
+        eq = trimLastOperand(eq);
+        setEquation(eq + " = ");
+        setDisplay(calculate(eq));
+        setIsNewNumber(false);
         break;
     
       default:
         break;
     }
-    setIsNewNumber(false);
   };
 
   const handleClick = useCallback(
