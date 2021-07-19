@@ -1,5 +1,6 @@
 import { useMemo, useCallback, useState } from 'react';
 import _ from 'lodash';
+import math from 'mathjs';
 import styles from './calculator.module.scss';
 
 export default function Calculator() {
@@ -41,9 +42,12 @@ export default function Calculator() {
   }
 
   const calculate = (eq) => {
-    // return the calculated value;
+    // return the calculated value of the input equation;
     // Note that eq may not be the complete equation
     eq = eq.replace(" ", "");
+    // Get rid of the last letter if it's an ops
+    if (['/', 'x', '-', '+'].indexOf(eq[eq.length-1]) >= 0) eq = eq.substring(0, eq.length-1);
+    return math.evaluate(eq.replace("x", "*"));
   }
 
   const handleNumber = (num) => {
