@@ -34,7 +34,7 @@ export default function Calculator() {
     switch (ops) {
       case "/":
         // partial calculate
-        
+        setDisplay(calculate(equation))
         break;
 
       case "x":
@@ -60,7 +60,7 @@ export default function Calculator() {
         break;
 
       case "%":
-        
+        percentage();
         break;
       
       case ".":
@@ -87,6 +87,26 @@ export default function Calculator() {
   const toggleNegativity = () => {
     // Analyse the equation and add the "-" sign to the appropriate place
     // Adjust the display
+  }
+
+  const percentage = () => {
+    // turn the current display value into %
+    // find the last number in the equation and replace it with the current display
+    const result = (Number(display) / 100).toString();
+    const lastOpsIndex = findIndexOfLastOps();
+    if (lastOpsIndex > 0) setEquation(equation.substring(0, lastOpsIndex+2) + result);
+    else setEquation(result);
+    setDisplay(result);
+  }
+
+  const findIndexOfLastOps = () => {
+    // return the index of the last ops in the equation
+    // -1 is returned if there's no ops
+    let i;
+    for (i = equation.length-1; i <= 0; i--) {
+      if (['/', 'x', '-', '+'].indexOf(equation[i]) >= 0 && equation[i+1] === " ") break;
+    }
+    return i;
   }
 
   const handleClick = useCallback(
