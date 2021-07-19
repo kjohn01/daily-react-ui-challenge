@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useState } from 'react';
 import _ from 'lodash';
 import styles from './calculator.module.scss';
-import { calculate, findIndexOfLastOperand, findIndexOfLastNumber, trimLastOperand } from './functions';
+import { calculate, findIndexOfLastOperand, trimLastOperand, findLastCalculation } from './functions';
 
 export default function Calculator() {
   const [display, setDisplay] = useState("0");
@@ -23,7 +23,7 @@ export default function Calculator() {
     // setDisplay(result);
   }
 
-  const handleNumber = (num) => {
+  const handleNumber = useCallback((num) => {
     if (isNewNumber || equation[equation.length-2] === "=") {
       setDisplay(num);
       setEquation(num);
@@ -40,33 +40,30 @@ export default function Calculator() {
       setEquation(equation+num);
     }
     setIsNewNumber(false);
-  };
+  }, [display, equation, isNewNumber])
 
-  const handleOperands = (ops) => {
+  const handleOperands = useCallback((ops) => {
     // console.log("operands", ops);
-    // Consective operands = overwriting
+    // Consecutive operands = overwriting
     // Divided by 0 = 0
     let eq = equation;
+    let lastOpsIndex;
     switch (ops) {
       case "/":
-        // partial calculate
-        
-        break;
-
       case "x":
+        eq = trimLastOperand(eq);
+        lastOpsIndex = findIndexOfLastOperand(eq);
         // partial calculate
+        if (lastOpsIndex !== -1 && ["x", "/"].indexOf(eq[lastOpsIndex]) >= 0) setDisplay(calculate(findLastCalculation(eq)));
+        setEquation(`${eq} ${ops} `);
+        setIsNewNumber(false);
         break;
       
       case "-":
-        eq = trimLastOperand(eq);
-        if (findIndexOfLastOperand(eq) !== -1) setDisplay(calculate(eq));
-        setEquation(eq + " - ");
-        setIsNewNumber(false);
-        break;
       case "+":
         eq = trimLastOperand(eq);
         if (findIndexOfLastOperand(eq) !== -1) setDisplay(calculate(eq));
-        setEquation(eq + " + ");
+        setEquation(`${eq} ${ops} `);
         setIsNewNumber(false);
         break;
   
@@ -100,7 +97,7 @@ export default function Calculator() {
       default:
         break;
     }
-  };
+  }, [equation]);
 
   const handleClick = useCallback(
     (e) => {
