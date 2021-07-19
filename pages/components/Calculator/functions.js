@@ -1,4 +1,7 @@
 import math from 'mathjs';
+import _ from 'lodash';
+
+export const isDigit = (num) => _.range(10).indexOf(num) >= 0 
 
 export const calculate = (eq) => math.evaluate(trimLastOperand(eq).replace(" ", "").replace("x", "*")).toString();
 

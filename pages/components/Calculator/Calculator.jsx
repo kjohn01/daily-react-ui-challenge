@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useState } from 'react';
 import _ from 'lodash';
 import styles from './calculator.module.scss';
-import { calculate, findIndexOfLastOperand, trimLastOperand, findLastCalculation, findLastNumber } from './functions';
+import { calculate, findIndexOfLastOperand, trimLastOperand, findLastCalculation, findLastNumber, isDigit } from './functions';
 
 export default function Calculator() {
   const [display, setDisplay] = useState("0");
@@ -13,15 +13,13 @@ export default function Calculator() {
     // Adjust the display
   }
 
-  const percentage = () => {
+  const percentage = useCallback(() => {
     // turn the current display value into %
     // find the last number in the equation and replace it with the current display
-    // const result = (Number(display) / 100).toString();
-    // const lastOpsIndex = findIndexOfLastOperand();
-    // if (lastOpsIndex > 0) setEquation(equation.substring(0, lastOpsIndex+2) + result);
-    // else setEquation(result);
-    // setDisplay(result);
-  }
+    const result = (Number(display) / 100).toString();
+    setEquation(equation.substring(0, findLastNumber(equation)[0]) + result);
+    setDisplay(result);
+  }, [display, equation]);
 
   const handleNumber = useCallback((num) => {
     if (isNewNumber || equation[equation.length-2] === "=") {
@@ -79,7 +77,9 @@ export default function Calculator() {
         break;
 
       case "%":
+        if (!isDigit(parseInt(equation[equation.length-1]))) break;
         percentage();
+        setIsNewNumber(false);
         break;
       
       case ".":
@@ -107,7 +107,7 @@ export default function Calculator() {
       default:
         break;
     }
-  }, [equation]);
+  }, [display, equation, percentage]);
 
   const handleClick = useCallback(
     (e) => {
