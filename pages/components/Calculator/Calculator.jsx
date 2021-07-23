@@ -33,7 +33,8 @@ export default function Calculator() {
     // turn the current display value into %
     // find the last number in the equation and replace it with the current display
     const result = (Number(display) / 100).toString();
-    setEquation(equation.substring(0, findLastNumber(equation)[0]) + result);
+    if (equation[equation.length-2] === "=") setEquation(result);
+    else setEquation(equation.substring(0, findLastNumber(equation)[0]) + result);
     setDisplay(result);
   }, [display, equation]);
 
@@ -67,6 +68,10 @@ export default function Calculator() {
     switch (ops) {
       case "/":
       case "x":
+        if (equation[equation.length-2] === "=") {
+          setEquation(`${display} ${ops} `);
+          break;
+        }
         // partial calculate
         if (lastOpsIndex !== -1 && ["x", "/"].indexOf(eq[lastOpsIndex]) >= 0) setDisplay(calculate(findLastCalculation(eq)));
         setEquation(`${eq} ${ops} `);
@@ -74,6 +79,10 @@ export default function Calculator() {
       
       case "-":
       case "+":
+        if (equation[equation.length-2] === "=") {
+          setEquation(`${display} ${ops} `);
+          break;
+        }
         if (lastOpsIndex !== -1) setDisplay(calculate(eq));
         setEquation(`${eq} ${ops} `);
         break;
@@ -89,7 +98,7 @@ export default function Calculator() {
         break;
 
       case "%":
-        if (!isDigit(parseInt(equation[equation.length-1]))) break;
+        if ((!isDigit(parseInt(equation[equation.length-1])) && equation[equation.length-2] !== "=")) break;
         percentage();
         break;
       
