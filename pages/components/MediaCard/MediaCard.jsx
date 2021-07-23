@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import styles from './mediaCard.module.scss';
 
@@ -13,3 +14,9 @@ export default function MediaCard({ title, description, img }) {
     </Card>
   );
 }
+
+MediaCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired
+};

@@ -5,9 +5,19 @@
     background-image: linear-gradient(135deg, #9156E0, #FF9768);
 }
 
+.footer {
+    color: lavender;
+    position: fixed;
+    bottom: 0;
+    margin: 1rem;
+}
+
 @media (max-width: 576px) {
     .root {
-        background-color: inherit;
+        background-image: none;
         align-items: flex-end;
+    }
+    .footer {
+        display: none;
     }
 }

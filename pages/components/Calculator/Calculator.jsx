@@ -54,6 +54,10 @@ export default function Calculator() {
       // current result is 0
       else setEquation(equation + num);
     }
+    else if (display === "-0") {
+      setDisplay(`-${num}`);
+      setEquation(equation.slice(0, equation.length-1) + num);
+    }
     else {
       setDisplay(display + num);
       setEquation(equation + num);

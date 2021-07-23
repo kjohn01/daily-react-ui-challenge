@@ -1,8 +1,11 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import { Navbar, Container } from 'react-bootstrap'
-import styles from './home.module.scss'
-import MediaCard from '../MediaCard/MediaCard'
+
+import React from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { Navbar, Container } from 'react-bootstrap';
+import styles from './home.module.scss';
+import MediaCard from '../MediaCard/MediaCard';
+import Footer from '../Footer/Footer';
 
 export default function Home() {
   return (
@@ -13,7 +16,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Navbar className="w-100">
+        <Navbar>
           <Container>
             <Navbar.Brand className={styles.title} href="https://daily-react-ui-challenge.vercel.app/">
               <img
@@ -33,8 +36,7 @@ export default function Home() {
             <a className={styles.card}>
               <MediaCard 
                 title="SignUpPage" 
-                description="Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-              across all continents except Antarctica" 
+                description="Lizards are a widespread group of reptiles, with over 6,000 species, ranging across all continents except Antarctica" 
                 img="https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
               />
             </a>
@@ -42,18 +44,19 @@ export default function Home() {
           <Link href="/CalculatorPage">
             <a className={styles.card}>
               <MediaCard 
-                title="CalculatorPage" 
-                description="Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-              across all continents except Antarctica" 
+                title="Calculator" 
+                description="An clone of the iphone calculator with equation showing. Event delegation is implemented for button event binding." 
                 img="https://cdn.dribbble.com/users/85529/screenshots/2377589/calculator.png"
               />
             </a>
           </Link>
         </Container>
 
-        <footer className={styles.footer}>
-          <p>Daily UI Logo designed by <a href="https://collectui.com/designers/CatherineWang">Catherine Wang</a>.</p>
-        </footer>
+        <Footer 
+          className="position-relative d-block" 
+          text="Daily UI Logo designed by" 
+          link="https://collectui.com/designers/CatherineWang" author="Catherine Wang" 
+        />
       </main>
     </div>
   )

@@ -3,6 +3,7 @@ $color-numbers: #F6ECFF;
 $color-secondaryOperands: #F1E0FD;
 $color-operands-1: #F7D261;
 $color-operands-2: #FE9C66;
+$color-border: #E5D8E9;
 
 .main{
     width: 30rem;
@@ -16,7 +17,7 @@ $color-operands-2: #FE9C66;
     padding: 1rem;
     text-align: right;
     overflow: auto;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid $color-border;
     .equation {
         color: grey;
     }
@@ -30,7 +31,7 @@ $color-operands-2: #FE9C66;
 @mixin grid {
     display: grid;
     grid-gap: 1px;
-    background-color: grey;
+    background-color: $color-border;
     button {
         background-color: $color-numbers;
         text-align: center;
@@ -47,8 +48,8 @@ $color-operands-2: #FE9C66;
     padding-top: 1px;
     button {
         background-color: transparent;
-        border-left: 1px solid grey;
-        border-bottom: 1px solid grey;
+        border-left: 1px solid $color-border;
+        border-bottom: 1px solid $color-border;
         color: white;
     }
 }
@@ -69,6 +70,9 @@ $color-operands-2: #FE9C66;
 }
 
 @media (max-width: 576px) {
+    .main {
+        border-radius: 0;
+    }
     .digits {
         .zero {
             padding-left: 3rem;
