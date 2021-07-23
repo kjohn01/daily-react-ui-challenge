@@ -143,7 +143,7 @@ export default function Calculator() {
     <button key={`OPS-${ops}`} value={ops}>{ops}</button>
   ));
   const createSecondaryOperands = () => ['C', '±', '%'].map((ops) => (
-    <button key={`OPS-${ops}`} value={ops}>{ops}</button>
+    <button key={`OPS-${ops}`} value={ops} className={styles.secondaryOperands}>{ops}</button>
   ));
 
   const digits = useMemo(() => createDigits(), []);

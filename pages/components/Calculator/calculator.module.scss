@@ -1,9 +1,13 @@
 @import "../../../styles/globals.scss";
+$color-numbers: #F6ECFF;
+$color-secondaryOperands: #F1E0FD;
+$color-operands-1: #F7D261;
+$color-operands-2: #FE9C66;
 
 .main{
     width: 30rem;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -11,7 +15,11 @@
     margin-top: 0.5rem;
     padding: 1rem;
     text-align: right;
+    overflow: auto;
     border-bottom: 1px solid grey;
+    .equation {
+        color: grey;
+    }
 }
 
 .buttons {
@@ -24,7 +32,7 @@
     grid-gap: 1px;
     background-color: grey;
     button {
-        background-color: lavenderblush;
+        background-color: $color-numbers;
         text-align: center;
         padding: 20px 0;
         font-size: 30px;
@@ -35,7 +43,7 @@
 .operands {
     @include grid;
     grid-template-columns: auto;
-    background-color: orange;
+    background-image: linear-gradient(135deg, $color-operands-1, $color-operands-2);
     padding-top: 1px;
     button {
         background-color: transparent;
@@ -50,7 +58,7 @@
     @include grid;
     grid-template-columns: auto auto auto;
     .secondaryOperands {
-        background-color: lavender;
+        background-color: $color-secondaryOperands;
     }
     .zero {
         grid-column-start: 1;

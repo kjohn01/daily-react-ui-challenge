@@ -2,7 +2,7 @@
 
 .root {
     @include page;
-    background-color: gray;
+    background-image: linear-gradient(135deg, #9156E0, #FF9768);
 }
 
 @media (max-width: 576px) {
