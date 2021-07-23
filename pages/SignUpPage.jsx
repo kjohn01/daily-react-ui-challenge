@@ -1,5 +1,5 @@
 import React from 'react';
-import BackButton from './components/BackButton/BackButton';
+import BackButton from '../components/BackButton/BackButton';
 
 const SignUpPage = () => {
     return (

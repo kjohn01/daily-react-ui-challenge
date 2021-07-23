@@ -1,7 +1,7 @@
 import React from 'react';
-import Calculator from './components/Calculator/Calculator';
-import BackButton from './components/BackButton/BackButton';
-import Footer from './components/Footer/Footer';
+import Calculator from '../components/Calculator/Calculator';
+import BackButton from '../components/BackButton/BackButton';
+import Footer from '../components/Footer/Footer';
 import styles from './calculatorPage.module.scss';
 
 const CalculatorPage = () => {
