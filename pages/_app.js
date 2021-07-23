@@ -1,8 +1,10 @@
-import '../styles/globals.scss'
-import 'bootstrap/dist/css/bootstrap.css'
+import React from 'react';
+import '../styles/globals.scss';
+import 'bootstrap/dist/css/bootstrap.css';
 
+// eslint-disable-next-line react/prop-types
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;

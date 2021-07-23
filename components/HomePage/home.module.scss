@@ -1,8 +1,7 @@
-@import "../../../styles/globals.scss";
+@import "../../styles/globals.scss";
 
 .main {
-  min-height: 100vh;
-  display: flex;
+  @include page;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -10,6 +9,7 @@
 .title {
   display: flex;
   align-items: center;
+  margin: 0;
 }
 
 .grid {
@@ -36,17 +36,7 @@
 }
 
 .footer {
-  display: flex;
-  justify-content: center;
-  padding: 0.5rem;
-  background-color: black;
-  color: white;
-  a {
-    color: inherit;
-  }
-  p {
-    margin: 0;
-  }
+  position: relative;
 }
 
 @media (max-width: 600px) {
