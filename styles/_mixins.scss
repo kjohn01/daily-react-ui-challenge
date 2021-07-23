@@ -3,3 +3,12 @@
       @content;
     }
 }
+
+@mixin page {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
