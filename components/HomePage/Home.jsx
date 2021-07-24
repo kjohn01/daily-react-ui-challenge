@@ -32,12 +32,12 @@ export default function Home() {
         </Navbar>
 
         <Container className={styles.grid}>
-          <Link href="/SignUpPage">
+          <Link href="/TodoListPage">
             <a className={styles.card}>
               <MediaCard 
-                title="SignUpPage" 
-                description="Lizards are a widespread group of reptiles, with over 6,000 species, ranging across all continents except Antarctica" 
-                img="https://images.unsplash.com/photo-1504450874802-0ba2bcd9b5ae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+                title="Todo List" 
+                description="A simple todo list with custom css animation, using the useReducer hook and context API to manage the states." 
+                img="https://cdn.dribbble.com/users/821812/screenshots/3967195/todoanim.gif"
               />
             </a>
           </Link>

@@ -4,10 +4,3 @@
     @include page;
     background-image: linear-gradient(135deg, #9156E0, #FF9768);
 }
-
-@media (max-width: 576px) {
-    .root {
-        background-image: none;
-        align-items: flex-end;
-    }
-}
