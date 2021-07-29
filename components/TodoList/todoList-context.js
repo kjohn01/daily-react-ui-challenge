@@ -23,7 +23,7 @@ const reducer = (state, action) => {
             {
               id: new Date().valueOf(),
               label: action.todoItemLabel,
-              completed: false
+              isCompleted: false
             }
           ]
         };
@@ -33,7 +33,7 @@ const reducer = (state, action) => {
       case actions.TOGGLE_COMPLETED: {
         return { todoList: state.todoList.map((todoItem) =>
             todoItem.id === action.todoItemId
-              ? { ...todoItem, completed: !todoItem.completed }
+              ? { ...todoItem, isCompleted: !todoItem.isCompleted }
               : todoItem
         )};
       }
@@ -58,5 +58,5 @@ const useTodo = () => {
     return context;
 };
 
-export { TodoListProvider, useTodo };
+export { actions, TodoListProvider, useTodo };
 
