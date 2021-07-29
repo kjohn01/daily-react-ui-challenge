@@ -1,6 +1,7 @@
 import React from 'react';
 import { TodoListProvider, useTodo } from './todoList-context';
 import TodoItem from './TodoItem';
+import TodoInput from './TodoInput';
 import styles from './todoList.module.scss';
 
 export default function TodoList() {
@@ -12,6 +13,7 @@ export default function TodoList() {
           todoList.map((todoItem) => <TodoItem key={todoItem.id} todoItem={todoItem} />)
         }
       </ul>
+      <TodoInput />
     </TodoListProvider>
   );
 }
