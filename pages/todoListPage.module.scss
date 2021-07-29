@@ -1,6 +1,6 @@
-@import '../styles/globals.scss';
+@import "../styles/globals.scss";
 
 .root {
-    @include page;
-    background-image: linear-gradient(135deg, #9156E0, #FF9768);
+  @include page;
+  background-color: $color-primary;
 }

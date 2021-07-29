@@ -36,7 +36,7 @@ export default function Home() {
             <a className={styles.card}>
               <MediaCard 
                 title="Todo List" 
-                description="A simple todo list with custom css animation, using the useReducer hook and context API to manage the states." 
+                description="A simple todo list with custom css animation, using the useReducer hook and context API to manage the states in the local cache." 
                 img="https://cdn.dribbble.com/users/821812/screenshots/3967195/todoanim.gif"
               />
             </a>
@@ -45,7 +45,7 @@ export default function Home() {
             <a className={styles.card}>
               <MediaCard 
                 title="Calculator" 
-                description="An clone of the iphone calculator with equation showing. Event delegation is implemented for button event binding." 
+                description="A clone of the iphone calculator with equation showing. Event delegation is implemented for button event binding." 
                 img="https://cdn.dribbble.com/users/85529/screenshots/2377589/calculator.png"
               />
             </a>
