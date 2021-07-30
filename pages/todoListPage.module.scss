@@ -3,4 +3,12 @@
 .root {
   @include page;
   background-color: $color-primary;
+  align-items: stretch;
+  padding-top: 5rem;
+}
+
+@media (max-width: 576px) {
+  .root {
+    padding-top: 0;
+  }
 }
