@@ -4,17 +4,21 @@
   background-color: white;
   border-radius: 20px;
   margin: 1rem;
-  padding: 2rem;
+  // padding-bottom: 2rem;
   width: 30rem;
+  display: flex;
+  flex-direction: column;
+  height: 83vh;
 }
 
 .title {
   color: $secondary;
-  margin-top: 1rem;
+  margin: 3rem 2rem 0 2rem;
 }
 
 .taskCount {
   display: flex;
+  margin: 1rem 2rem 0 2rem;
   p {
     margin-right: 1rem;
   }
@@ -22,16 +26,18 @@
     color: $color-primary;
   }
   .done {
-    color: mediumaquamarine;
+    color: $color-success;
   }
   .togo {
-    color: darkorange;
+    color: $color-warning;
   }
 }
 
 .list {
-  margin-top: 2rem;
+  margin: 2rem 2rem 0 2rem;
   padding-left: 0;
+  overflow: auto;
+  flex-grow: 2;
 }
 
 .todoItem {
@@ -96,10 +102,27 @@
   padding-bottom: 1rem;
 }
 
-.input {
-}
-
-.add {
+.todoInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid gainsboro;
+  input {
+    flex-grow: 2;
+    border: 0;
+    border-bottom: 1px solid gainsboro;
+    color: $secondary;
+    height: 100%;
+    margin: 0 1rem 0 0.5rem;
+    &:focus {
+      outline: 0;
+    }
+  }
+  .add {
+    border: 0;
+    background-color: $color-primary;
+  }
 }
 
 @media (max-width: 576px) {
@@ -107,5 +130,6 @@
     margin: 0;
     border-radius: 0;
     width: 100%;
+    height: 100vh;
   }
 }
