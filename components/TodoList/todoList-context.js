@@ -9,6 +9,7 @@ const initialState = {
 
 const actions = {
     ADD_TODO_ITEM: "ADD_TODO_ITEM",
+    EDIT_TODO_ITEM: "EDIT_TODO_ITEM",
     REMOVE_TODO_ITEM: "REMOVE_TODO_ITEM",
     TOGGLE_COMPLETED: "TOGGLE_COMPLETED"
 };
@@ -21,22 +22,38 @@ const reducer = (state, action) => {
           todoList: [
             ...state.todoList,
             {
-              id: new Date().valueOf(),
+              id: new Date().valueOf().toString(),
               label: action.todoItemLabel,
               isCompleted: false
             }
           ]
         };
-      case actions.REMOVE_TODO_ITEM: {
-        return { todoList: state.todoList.filter((todoItem) => todoItem.id !== action.todoItemId) };
-      }
-      case actions.TOGGLE_COMPLETED: {
-        return { todoList: state.todoList.map((todoItem) =>
+      case actions.EDIT_TODO_ITEM: 
+        return {
+          todoList: state.todoList.map((todoItem) =>
+            todoItem.id === action.todoItemId
+              ? { 
+                  ...todoItem, 
+                  label: action.todoItemLabel,
+                  isCompleted: false
+                }
+              : todoItem
+          )
+        }
+      case actions.REMOVE_TODO_ITEM: 
+        return { 
+          todoList: state.todoList.filter((todoItem) => todoItem.id !== action.todoItemId) 
+        };
+      
+      case actions.TOGGLE_COMPLETED: 
+        return { 
+          todoList: state.todoList.map((todoItem) =>
             todoItem.id === action.todoItemId
               ? { ...todoItem, isCompleted: !todoItem.isCompleted }
               : todoItem
-        )};
-      }
+          )
+        };
+  
       default:
         throw new Error(`Unhandled action type: ${action.type}`);
     }

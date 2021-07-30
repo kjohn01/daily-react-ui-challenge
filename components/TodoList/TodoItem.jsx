@@ -1,36 +1,21 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import { Button } from 'react-bootstrap';
-import { actions, useTodo } from './todoList-context';
+import ItemDisplay from './ItemDisplay';
+import ItemEditInput from './ItemEditInput';
 import styles from './todoList.module.scss';
 
 export default function TodoItem({ todoItem }) {
-    const { id, isCompleted, label } = todoItem;
-    const { dispatch } = useTodo();
+    const [isEditing, setIsEditing] = useState(false);
+    const toggleIsEditing = useCallback(() => setIsEditing(!isEditing), [isEditing]);
     let cx = classNames.bind(styles);
-    
+
     return (
-        <li className={styles.todoItem}>
-            <label className={styles.checkbox}>
-                <input 
-                    type="checkbox" 
-                    onChange={() => dispatch({ type: actions.TOGGLE_COMPLETED, todoItemId: id })}
-                />
-                <span className={styles.checkMark} />
-            </label>
-            <p className={cx({ label, completed: isCompleted })}>
-                {label}
-            </p>
+        <li className={cx({ todoItem: true, editing: isEditing })}>
             {
-                !isCompleted && <Button
-                variant="light"
-                size="sm"
-                className={styles.delete}
-                onClick={() => dispatch({ type: actions.REMOVE_TODO_ITEM, todoItemId: id })}
-                >
-                    X
-                </Button>
+                isEditing 
+                ? <ItemEditInput todoItem={todoItem} toggleIsEditing={toggleIsEditing} /> 
+                : <ItemDisplay todoItem={todoItem} toggleIsEditing={toggleIsEditing} />
             }
         </li>
     );

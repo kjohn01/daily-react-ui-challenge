@@ -40,11 +40,30 @@
   flex-grow: 2;
 }
 
+@mixin item {
+  flex-grow: 2;
+  border: 0;
+  border-bottom: 1px solid gainsboro;
+  color: $secondary;
+}
+
+@mixin input {
+  @include item;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.editing {
+  align-items: center;
+  padding-bottom: 0.75rem;
+}
+
 .todoItem {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
-
+  // For ItemDisplay
   .checkbox {
     position: relative;
     cursor: pointer;
@@ -80,10 +99,8 @@
     }
   }
   .label {
-    flex-grow: 2;
-    border-bottom: 1px solid gainsboro;
+    @include item;
     margin: 0 0.5rem 1rem 2.5rem;
-    color: $secondary;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -93,13 +110,24 @@
     color: gainsboro;
     border-color: transparent;
   }
-}
-
-.delete {
-  color: $secondary;
-  background-color: transparent;
-  border: 0;
-  padding-bottom: 1rem;
+  .delete {
+    color: $secondary;
+    background-color: transparent;
+    border: 0;
+    padding-bottom: 1rem;
+  }
+  // For ItemEditInput
+  input {
+    @include input;
+    margin: 0 0.5rem 0 1rem;
+  }
+  svg {
+    margin-left: 0.25rem;
+  }
+  .doneEdit {
+    border: 0;
+    background-color: $color-success;
+  }
 }
 
 .todoInput {
@@ -109,18 +137,11 @@
   padding: 1.5rem 2rem;
   border-top: 1px solid gainsboro;
   input {
-    flex-grow: 2;
-    border: 0;
-    border-bottom: 1px solid gainsboro;
-    color: $secondary;
+    @include input;
     height: 100%;
     margin: 0 1rem 0 0.5rem;
-    &:focus {
-      outline: 0;
-    }
   }
   .add {
-    border: 0;
     background-color: $color-primary;
   }
 }
