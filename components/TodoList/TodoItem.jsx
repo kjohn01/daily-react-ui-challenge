@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import { Button } from 'react-bootstrap';
 import { actions, useTodo } from './todoList-context';
 import styles from './todoList.module.scss';
 
@@ -10,17 +11,27 @@ export default function TodoItem({ todoItem }) {
     let cx = classNames.bind(styles);
     
     return (
-        <li
-            className={cx({ todoItem: true , completed: isCompleted })}
-            onClick={() => dispatch({ type: actions.TOGGLE_COMPLETED, todoItemId: id })}
-            >
-            {label}
-            <button
+        <li className={styles.todoItem}>
+            <label className={styles.checkbox}>
+                <input 
+                    type="checkbox" 
+                    onChange={() => dispatch({ type: actions.TOGGLE_COMPLETED, todoItemId: id })}
+                />
+                <span className={styles.checkMark} />
+            </label>
+            <p className={cx({ label, completed: isCompleted })}>
+                {label}
+            </p>
+            {
+                !isCompleted && <Button
+                variant="light"
+                size="sm"
                 className={styles.delete}
                 onClick={() => dispatch({ type: actions.REMOVE_TODO_ITEM, todoItemId: id })}
-            >
-                X
-            </button>
+                >
+                    X
+                </Button>
+            }
         </li>
     );
 }

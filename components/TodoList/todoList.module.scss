@@ -31,17 +31,69 @@
 
 .list {
   margin-top: 2rem;
+  padding-left: 0;
 }
 
 .todoItem {
-}
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 
-.completed {
-  text-decoration: line-through;
+  .checkbox {
+    position: relative;
+    cursor: pointer;
+
+    // Hide the default checkbox
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    // The custom checkbox
+    .checkMark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: transparent;
+      border-radius: 50%;
+      border: 1px solid gainsboro;
+    }
+    &:hover {
+      .checkMark {
+        background-color: $light;
+      }
+    }
+    input:checked ~ .checkMark {
+      background-color: $color-primary;
+      border-color: transparent;
+    }
+  }
+  .label {
+    flex-grow: 2;
+    border-bottom: 1px solid gainsboro;
+    margin: 0 0.5rem 1rem 2.5rem;
+    color: $secondary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .completed {
+    text-decoration: line-through;
+    color: gainsboro;
+    border-color: transparent;
+  }
 }
 
 .delete {
-  margin-left: 1rem;
+  color: $secondary;
+  background-color: transparent;
+  border: 0;
+  padding-bottom: 1rem;
 }
 
 .input {
