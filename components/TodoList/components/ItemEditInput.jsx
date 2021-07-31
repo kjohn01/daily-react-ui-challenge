@@ -22,7 +22,7 @@ export default function ItemEditInput({ todoItem, toggleIsEditing }) {
     if (isCompleted) return <></>;
     return (
         <>
-            <PenFill color="darkorange" size={32} className={styles.editIcon} />
+            <PenFill color="grey" size={32} className={styles.editIcon} />
             <div className={styles.input}>
                 <input
                     type="text"
@@ -30,7 +30,7 @@ export default function ItemEditInput({ todoItem, toggleIsEditing }) {
                     value={currentValue}
                     onChange={(e) => setCurrentValue(e.target.value)}
                     onKeyPress={e => e.key === "Enter" && handleSubmit()}
-                    // onBlur={toggleIsEditing}
+                    onBlur={toggleIsEditing}
                 />
                 <hr className={styles.hr} />
             </div>
