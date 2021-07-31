@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { PenFill } from 'react-bootstrap-icons';
-// import classNames from 'classnames/bind';
 import { actions, useTodo } from './todoList-context';
 import styles from './todoList.module.scss';
 
@@ -23,7 +22,7 @@ export default function ItemEditInput({ todoItem, toggleIsEditing }) {
     if (isCompleted) return <></>;
     return (
         <>
-            <PenFill color="darkorange" size={20} />
+            <PenFill color="darkorange" size={32} className={styles.editIcon} />
             <input
                 type="text"
                 autoFocus

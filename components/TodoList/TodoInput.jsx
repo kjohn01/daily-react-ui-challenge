@@ -18,7 +18,7 @@ export default function TodoInput() {
 
     return (
         <div className={styles.todoInput}>
-            <Plus color="darkorange" size={30} />
+            <Plus color="darkorange" size={32} />
             <input
                 type="text"
                 value={inputValue}
