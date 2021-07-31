@@ -1,0 +1,14 @@
+@import "../styles/globals.scss";
+
+.root {
+  @include page;
+  background-color: $color-primary;
+  align-items: stretch;
+  padding: 5rem 0 0 0;
+}
+
+@media (max-width: 576px) {
+  .root {
+    padding: 0;
+  }
+}
