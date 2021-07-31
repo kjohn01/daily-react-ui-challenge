@@ -42,12 +42,12 @@ export default function ItemDisplay({ todoItem, toggleIsEditing }) {
                     {" "}
                 </button>
             }
-            <p 
-                className={cx({ label: true, completed: isCompleted })}
-                onClick={() => !isCompleted && toggleIsEditing()}
-            >
-                {label}
-            </p>
+            <div className={cx({ label: true, completed: isCompleted })}>
+                <p onClick={() => !isCompleted && toggleIsEditing()}>
+                    {label}
+                </p>
+                <hr className={styles.hr} />
+            </div>
             <Button
                 variant="light"
                 size="sm"

@@ -48,15 +48,22 @@
 .label {
   @include item;
   margin: 0 1.5rem 0 1rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  p {
+    margin: 0;
+    color: $secondary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .completed {
-  text-decoration: line-through;
-  color: gainsboro;
-  border-color: transparent;
+  hr {
+    @include rise;
+  }
+  p {
+    @include cross;
+  }
 }
 
 .delete {
@@ -67,8 +74,15 @@
 
 // For ItemEditInput
 .input {
-  @include input;
+  @include item;
   margin: 0 0.5rem 0 1rem;
+  input {
+    @include input;
+  }
+}
+
+.hr {
+  margin: 0.25rem 0 0 0;
 }
 
 .editIcon {

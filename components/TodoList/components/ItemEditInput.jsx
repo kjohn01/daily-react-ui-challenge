@@ -23,15 +23,17 @@ export default function ItemEditInput({ todoItem, toggleIsEditing }) {
     return (
         <>
             <PenFill color="darkorange" size={32} className={styles.editIcon} />
-            <input
-                type="text"
-                autoFocus
-                className={styles.input}
-                value={currentValue}
-                onChange={(e) => setCurrentValue(e.target.value)}
-                onKeyPress={e => e.key === "Enter" && handleSubmit()}
-                onBlur={toggleIsEditing}
-            />
+            <div className={styles.input}>
+                <input
+                    type="text"
+                    autoFocus
+                    value={currentValue}
+                    onChange={(e) => setCurrentValue(e.target.value)}
+                    onKeyPress={e => e.key === "Enter" && handleSubmit()}
+                    // onBlur={toggleIsEditing}
+                />
+                <hr className={styles.hr} />
+            </div>
             <Button onClick={handleSubmit} size="sm" className={styles.doneEdit}>
                 Done
             </Button>

@@ -10,9 +10,11 @@
 }
 
 .input {
+  @include item;
   @include input;
   height: 100%;
   margin: 0 1rem;
+  border-bottom: 1px solid gainsboro;
 }
 .add {
   background-color: $color-primary;
