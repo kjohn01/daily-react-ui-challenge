@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { PenFill } from 'react-bootstrap-icons';
-import { actions, useTodo } from './todoList-context';
-import styles from './todoList.module.scss';
+import { actions, useTodo } from '../todoList-context';
+import styles from '../styles/todoItem.module.scss';
 
 export default function ItemEditInput({ todoItem, toggleIsEditing }) {
     const { dispatch } = useTodo();
@@ -26,6 +26,7 @@ export default function ItemEditInput({ todoItem, toggleIsEditing }) {
             <input
                 type="text"
                 autoFocus
+                className={styles.input}
                 value={currentValue}
                 onChange={(e) => setCurrentValue(e.target.value)}
                 onKeyPress={e => e.key === "Enter" && handleSubmit()}

@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import ItemDisplay from './ItemDisplay';
-import ItemEditInput from './ItemEditInput';
-import styles from './todoList.module.scss';
+import ItemDisplay from '../components/ItemDisplay';
+import ItemEditInput from '../components/ItemEditInput';
+import styles from '../styles/todoItem.module.scss';
 
 export default function TodoItem({ todoItem }) {
     const [isEditing, setIsEditing] = useState(false);

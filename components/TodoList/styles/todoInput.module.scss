@@ -1,0 +1,19 @@
+@import "../../../styles/globals.scss";
+@import "mixins";
+
+.todoInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid gainsboro;
+}
+
+.input {
+  @include input;
+  height: 100%;
+  margin: 0 1rem;
+}
+.add {
+  background-color: $color-primary;
+}

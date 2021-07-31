@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { useTodo } from './todoList-context';
+import { useTodo } from '../todoList-context';
 import TodoItem from './TodoItem';
-import TodoInput from './TodoInput';
-import styles from './todoList.module.scss';
+import TodoInput from '../components/TodoInput';
+import styles from '../styles/todoList.module.scss';
 
 export default function TodoList() {
   const { state: {todoList} } = useTodo();

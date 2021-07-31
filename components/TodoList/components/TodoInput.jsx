@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Plus } from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
-import { actions, useTodo } from './todoList-context';
-import styles from './todoList.module.scss';
+import { actions, useTodo } from '../todoList-context';
+import styles from '../styles/todoInput.module.scss';
 
 export default function TodoInput() {
     const [inputValue, setInputValue] = useState("");
@@ -21,6 +21,7 @@ export default function TodoInput() {
             <Plus color="darkorange" size={32} />
             <input
                 type="text"
+                className={styles.input}
                 value={inputValue}
                 placeholder={"New todo item..."}
                 onChange={(e) => setInputValue(e.target.value)}

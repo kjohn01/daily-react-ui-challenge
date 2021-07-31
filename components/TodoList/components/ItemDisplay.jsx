@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { Check } from 'react-bootstrap-icons';
 import classNames from 'classnames/bind';
-import { actions, useTodo } from './todoList-context';
-import styles from './todoList.module.scss';
+import { actions, useTodo } from '../todoList-context';
+import styles from '../styles/todoItem.module.scss';
 
 export default function ItemDisplay({ todoItem, toggleIsEditing }) {
     const { dispatch } = useTodo();

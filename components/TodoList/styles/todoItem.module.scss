@@ -1,0 +1,81 @@
+@import "../../../styles/globals.scss";
+@import "animation";
+@import "mixins";
+
+.todoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  padding-left: 0;
+}
+
+.checkMark {
+  @include check;
+  position: relative;
+  &::before {
+    content: "";
+    background: white;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    @include fade-out-right;
+  }
+}
+
+.checkBox {
+  @include check;
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: 0.25rem;
+  background: transparent;
+  border: 2px solid gainsboro;
+  border-radius: 50%;
+  &:hover {
+    background-color: $light;
+  }
+}
+
+.ripple {
+  border: none;
+  outline: none;
+  @include ripple;
+}
+
+.label {
+  @include item;
+  margin: 0 1.5rem 0 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gainsboro;
+  border-color: transparent;
+}
+
+.delete {
+  color: $secondary;
+  background-color: transparent;
+  border: 0;
+}
+
+// For ItemEditInput
+.input {
+  @include input;
+  margin: 0 0.5rem 0 1rem;
+}
+
+.editIcon {
+  padding: 0 0.5rem;
+}
+
+.doneEdit {
+  border: 0;
+  background-color: $color-success;
+}
