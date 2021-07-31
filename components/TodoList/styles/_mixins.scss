@@ -1,0 +1,23 @@
+@mixin item {
+  flex-grow: 2;
+  border: 0;
+}
+
+@mixin input {
+  padding: 0;
+  border: 0;
+  color: $secondary;
+  &:focus {
+    outline: 0;
+  }
+}
+
+@mixin check {
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:focus {
+    outline: none;
+  }
+}

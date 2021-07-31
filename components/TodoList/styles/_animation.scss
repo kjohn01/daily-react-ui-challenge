@@ -1,0 +1,67 @@
+@import "../../../styles/globals.scss";
+
+@mixin fade-out-right {
+  transform: scaleX(1);
+  transform-origin: center right 0px;
+  animation: fade-out-right ease 0.5s forwards;
+  @keyframes fade-out-right {
+    from {
+      transform: scaleX(1);
+      transform-origin: center right 0px;
+    }
+    to {
+      transform: scaleX(0);
+      transform-origin: center right 0px;
+    }
+  }
+}
+
+@mixin cross {
+  text-decoration: solid;
+  color: $secondary;
+  animation: cross 0.25s linear 0.25s forwards;
+  @keyframes cross {
+    from {
+      text-decoration: solid;
+      color: $secondary;
+    }
+    to {
+      text-decoration: line-through;
+      color: gainsboro;
+    }
+  }
+}
+
+@mixin rise {
+  transform: translateY(0);
+  animation: rise 0.5s linear forwards;
+  @keyframes rise {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-1rem);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-1rem);
+    }
+  }
+}
+
+@mixin ripple {
+  transition: all 0.7s ease;
+  animation: ripple 1.5s linear 1;
+  @keyframes ripple {
+    from {
+      box-shadow: 0 0 0 0 rgba($color-success, 0.3),
+        0 0 0 1px rgba($color-success, 0.3), 0 0 0 3px rgba($color-success, 0.3);
+    }
+    to {
+      box-shadow: 0 0 0 0 rgba($color-success, 0.3),
+        0 0 0 4px rgba($color-success, 0.3), 0 0 0 10px rgba($color-success, 0);
+    }
+  }
+}
