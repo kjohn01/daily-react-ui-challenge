@@ -28,14 +28,15 @@ export default function ItemDisplay({ todoItem, toggleIsEditing }) {
         <>
             {
                 isCompleted
-                ? <Check 
-                    color="mediumaquamarine" 
-                    size={32} 
-                    className={styles.check} 
-                    onClick={() => toggleCompleted()} 
-                />
+                ? <div className={styles.checkMark}>
+                    <Check 
+                        color="mediumaquamarine" 
+                        size={32}  
+                        onClick={() => toggleCompleted()} 
+                    />
+                </div>
                 : <button
-                    className={cx({ checkMark: true, ripple: isRippling })}
+                    className={cx({ checkBox: true, ripple: isRippling })}
                     onClick={startRipple}
                 >
                     {" "}
