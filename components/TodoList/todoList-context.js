@@ -11,7 +11,8 @@ const actions = {
     ADD_TODO_ITEM: "ADD_TODO_ITEM",
     EDIT_TODO_ITEM: "EDIT_TODO_ITEM",
     REMOVE_TODO_ITEM: "REMOVE_TODO_ITEM",
-    TOGGLE_COMPLETED: "TOGGLE_COMPLETED"
+    TOGGLE_COMPLETED: "TOGGLE_COMPLETED",
+    OVERWRITE_TODO_ITEMS: "OVERWRITE_TODO_ITEMS"
 };
 
 const reducer = (state, action) => {
@@ -27,6 +28,10 @@ const reducer = (state, action) => {
               isCompleted: false
             }
           ]
+        };
+      case actions.OVERWRITE_TODO_ITEMS:
+        return {
+          todoList: action.todoList
         };
       case actions.EDIT_TODO_ITEM: 
         return {

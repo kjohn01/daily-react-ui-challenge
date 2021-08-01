@@ -12,6 +12,7 @@
     "classnames": "^2.2.6",
     "lodash": "^4.17.21",
     "mathjs": "^9.4.4",
+    "mongodb": "^3.6.10",
     "next": "10.0.8",
     "react": "17.0.1",
     "react-bootstrap": "^1.6.1",

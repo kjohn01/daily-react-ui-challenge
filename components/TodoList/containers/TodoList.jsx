@@ -1,12 +1,33 @@
-import React, { useMemo } from 'react';
-import { useTodo } from '../todoList-context';
+import React, { useMemo, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { actions, useTodo } from '../todoList-context';
 import TodoItem from './TodoItem';
 import TodoInput from '../components/TodoInput';
+import { connectToDatabase, fetchTodoItems } from '../database';
 import styles from '../styles/todoList.module.scss';
 
-export default function TodoList() {
-  const { state: {todoList} } = useTodo();
+export async function getServerSideProps() {
+  const { client } = await connectToDatabase()
+
+  const isConnected = await client.isConnected()
+
+  return {
+    props: { isConnected },
+  }
+}
+export default function TodoList({ isConnected }) {
+  const { state: {todoList}, dispatch } = useTodo();
   const completedItems = useMemo(() => todoList.filter((todoItem) => todoItem.isCompleted === true), [todoList]);
+
+  useEffect(() => {
+    console.log(isConnected);
+    // if (isConnected) {
+    //   dispatch({ 
+    //     type: actions.OVERWRITE_TODO_ITEMS, 
+    //     todoList: fetchTodoItems()
+    //   });
+    // }
+  }, [dispatch, isConnected]);
   
   return (
     <div className={styles.root}>
@@ -27,3 +48,7 @@ export default function TodoList() {
     </div>
   );
 }
+
+TodoList.propTypes= {
+  isConnected: PropTypes.bool
+};
