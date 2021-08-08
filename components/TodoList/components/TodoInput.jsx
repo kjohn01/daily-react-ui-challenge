@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Plus } from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
 import { actions, useTodo } from '../todoList-context';
@@ -8,13 +8,13 @@ export default function TodoInput() {
     const [inputValue, setInputValue] = useState("");
     const { dispatch } = useTodo();
 
-    const handleSubmit = () => {
+    const handleSubmit = useCallback((inputValue) => {
         dispatch({ 
             type: actions.ADD_TODO_ITEM, 
             todoItemLabel: inputValue
         });
         setInputValue("");
-    };
+    }, [dispatch]);
 
     return (
         <div className={styles.todoInput}>
@@ -25,7 +25,7 @@ export default function TodoInput() {
                 value={inputValue}
                 placeholder={"New todo item..."}
                 onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={e => e.key === "Enter" && handleSubmit()}
+                onKeyPress={e => e.key === "Enter" && handleSubmit(inputValue)}
             />
             <Button onClick={handleSubmit} size="sm" className={styles.add}>Add</Button>
         </div>

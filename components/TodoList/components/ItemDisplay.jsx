@@ -8,13 +8,13 @@ import styles from '../styles/todoItem.module.scss';
 
 export default function ItemDisplay({ todoItem, toggleIsEditing }) {
     const { dispatch } = useTodo();
-    const { id, isCompleted, label } = todoItem;
+    const { itemId, isCompleted, label } = todoItem;
     const [isRippling, setIsRippling] = useState(false);
     let cx = classNames.bind(styles);
 
     const toggleCompleted = useCallback(() => {
-        dispatch({ type: actions.TOGGLE_COMPLETED, todoItemId: id })
-    }, [dispatch, id]);
+        dispatch({ type: actions.TOGGLE_COMPLETED, todoItemId: itemId })
+    }, [dispatch, itemId]);
 
     const startRipple = useCallback(() => {
         setIsRippling(true);
@@ -52,7 +52,7 @@ export default function ItemDisplay({ todoItem, toggleIsEditing }) {
                 variant="light"
                 size="sm"
                 className={styles.delete}
-                onClick={() => dispatch({ type: actions.REMOVE_TODO_ITEM, todoItemId: id })}
+                onClick={() => dispatch({ type: actions.REMOVE_TODO_ITEM, todoItemId: itemId })}
             >
                 X
             </Button>
@@ -62,7 +62,7 @@ export default function ItemDisplay({ todoItem, toggleIsEditing }) {
 
 ItemDisplay.propTypes = {
     todoItem: PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        itemId: PropTypes.string.isRequired,
         isCompleted: PropTypes.bool.isRequired,
         label: PropTypes.string.isRequired
     }).isRequired,
