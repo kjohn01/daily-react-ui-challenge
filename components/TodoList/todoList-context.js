@@ -1,11 +1,12 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
-
-const todoListContext = React.createContext();
+import { updateTodoItems } from './database';
 
 const initialState = {
     todoList: []
 };
+
+const todoListContext = React.createContext();
 
 const actions = {
     ADD_TODO_ITEM: "ADD_TODO_ITEM",
@@ -16,48 +17,46 @@ const actions = {
 };
 
 const reducer = (state, action) => {
-    console.log(action.type);
+    let { todoList } = state;
     switch (action.type) {
       case actions.ADD_TODO_ITEM:
-        return {
-          todoList: [
-            ...state.todoList,
-            {
-              id: new Date().valueOf().toString(),
-              label: action.todoItemLabel,
-              isCompleted: false
-            }
-          ]
-        };
+        todoList.push({
+          itemId: new Date().valueOf().toString(),
+          label: action.todoItemLabel,
+          isCompleted: false
+        });
+        updateTodoItems(todoList);
+        return { todoList };
+        
       case actions.OVERWRITE_TODO_ITEMS:
-        return {
-          todoList: action.todoList
-        };
+        return { todoList: action.todoList };
+
       case actions.EDIT_TODO_ITEM: 
-        return {
-          todoList: state.todoList.map((todoItem) =>
-            todoItem.id === action.todoItemId
-              ? { 
-                  ...todoItem, 
-                  label: action.todoItemLabel,
-                  isCompleted: false
-                }
-              : todoItem
-          )
-        }
+        todoList = todoList.map((todoItem) =>
+          todoItem.itemId === action.todoItemId
+            ? { 
+                ...todoItem, 
+                label: action.todoItemLabel,
+                isCompleted: false
+              }
+            : todoItem
+        );
+        updateTodoItems(todoList);
+        return { todoList };
+
       case actions.REMOVE_TODO_ITEM: 
-        return { 
-          todoList: state.todoList.filter((todoItem) => todoItem.id !== action.todoItemId) 
-        };
-      
+        todoList = todoList.filter((todoItem) => todoItem.itemId !== action.todoItemId);
+        updateTodoItems(todoList);
+        return { todoList };
+
       case actions.TOGGLE_COMPLETED: 
-        return { 
-          todoList: state.todoList.map((todoItem) =>
-            todoItem.id === action.todoItemId
-              ? { ...todoItem, isCompleted: !todoItem.isCompleted }
-              : todoItem
-          )
-        };
+        todoList = todoList.map((todoItem) =>
+          todoItem.itemId === action.todoItemId
+            ? { ...todoItem, isCompleted: !todoItem.isCompleted }
+            : todoItem
+        )
+        updateTodoItems(todoList);
+        return { todoList };
   
       default:
         throw new Error(`Unhandled action type: ${action.type}`);
