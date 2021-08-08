@@ -23,7 +23,7 @@ export default function TodoItem({ todoItem }) {
 
 TodoItem.propTypes = {
     todoItem: PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        itemId: PropTypes.string.isRequired,
         isCompleted: PropTypes.bool.isRequired,
         label: PropTypes.string.isRequired
     }).isRequired
