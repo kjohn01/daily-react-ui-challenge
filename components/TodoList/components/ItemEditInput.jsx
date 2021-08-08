@@ -7,13 +7,13 @@ import styles from '../styles/todoItem.module.scss';
 
 export default function ItemEditInput({ todoItem, toggleIsEditing }) {
     const { dispatch } = useTodo();
-    const { id, isCompleted, label } = todoItem;
+    const { itemId, isCompleted, label } = todoItem;
     const [currentValue, setCurrentValue] = useState(label);
 
     const handleSubmit = () => {
         dispatch({ 
             type: actions.EDIT_TODO_ITEM, 
-            todoItemId: id,
+            todoItemId: itemId,
             todoItemLabel: currentValue
         });
         toggleIsEditing();
@@ -43,7 +43,7 @@ export default function ItemEditInput({ todoItem, toggleIsEditing }) {
 
 ItemEditInput.propTypes = {
     todoItem: PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        itemId: PropTypes.string.isRequired,
         isCompleted: PropTypes.bool.isRequired,
         label: PropTypes.string.isRequired
     }).isRequired,

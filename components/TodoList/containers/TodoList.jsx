@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect } from 'react';
-import { useTodo } from '../todoList-context';
+import { actions, useTodo } from '../todoList-context';
 import TodoItem from './TodoItem';
 import TodoInput from '../components/TodoInput';
 import { fetchTodoItems } from '../database';
@@ -11,7 +11,10 @@ export default function TodoList() {
 
   useEffect(() => {
     fetchTodoItems().then((items) => {
-      // console.log(items);
+      dispatch({ 
+        type: actions.OVERWRITE_TODO_ITEMS, 
+        todoList: items
+      });
     });
   }, [dispatch]);
   
@@ -27,7 +30,7 @@ export default function TodoList() {
       
       <ul className={styles.list}>
         {
-          todoList.map((todoItem) => <TodoItem key={todoItem.id} todoItem={todoItem} />)
+          todoList.map((todoItem) => <TodoItem key={todoItem.itemId} todoItem={todoItem} />)
         }
       </ul>
       <TodoInput />
